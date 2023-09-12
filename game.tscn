@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://civw06hbqtjuc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vvkbq"]
+friction = 0.05
+bounce = 0.5
+
+[node name="Game" type="Node2D"]
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="Object1" type="RigidBody2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="Object2" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_vvkbq")
+metadata/_edit_group_ = true
+
+[node name="Object3" type="StaticBody2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="Gravity" type="Area2D" parent="."]
+gravity = 100.0
+linear_damp = 0.6
