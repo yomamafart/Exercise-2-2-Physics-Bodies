@@ -1,23 +1,68 @@
-[gd_scene load_steps=2 format=3 uid="uid://civw06hbqtjuc"]
+[gd_scene load_steps=6 format=3 uid="uid://civw06hbqtjuc"]
+
+[ext_resource type="Texture2D" uid="uid://cjn8cwspkfbm2" path="res://icon.svg" id="1_rmh3j"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3wld7"]
+friction = 0.01
+bounce = 1.0
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vvkbq"]
 friction = 0.05
 bounce = 0.5
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lg2ut"]
+size = Vector2(100, 100)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x1mtn"]
+radius = 100.0
+
 [node name="Game" type="Node2D"]
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
+polygon = PackedVector2Array(0, -64, -32, -64, -192, -64, -256, 0, -256, -128, 896, -128, 896, 512, -256, 512, -256, 0, -192, -64, -192, 448, 832, 448, 832, -64)
+
 [node name="Object1" type="RigidBody2D" parent="."]
+position = Vector2(100, 100)
+physics_material_override = SubResource("PhysicsMaterial_3wld7")
 metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Object1"]
+texture = ExtResource("1_rmh3j")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Object1"]
+polygon = PackedVector2Array(64, -59.6, 64, 59, 59.6, 64, -59, 64, -64, 59.6, -64, -59.6, -59, -63.9, 59, -64)
 
 [node name="Object2" type="RigidBody2D" parent="."]
+position = Vector2(600, 200)
 physics_material_override = SubResource("PhysicsMaterial_vvkbq")
+linear_velocity = Vector2(100, 100)
+angular_velocity = 0.0174533
 metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Object2"]
+texture = ExtResource("1_rmh3j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Object2"]
+shape = SubResource("RectangleShape2D_lg2ut")
 
 [node name="Object3" type="StaticBody2D" parent="."]
+position = Vector2(700, 350)
+rotation = 0.785398
 metadata/_edit_group_ = true
 
+[node name="Sprite2D" type="Sprite2D" parent="Object3"]
+texture = ExtResource("1_rmh3j")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Object3"]
+polygon = PackedVector2Array(64, 64, -64, 64, -64, -64, 64, -64)
+
 [node name="Gravity" type="Area2D" parent="."]
+position = Vector2(150, 300)
+gravity_space_override = 3
 gravity = 100.0
 linear_damp = 0.6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gravity"]
+shape = SubResource("CircleShape2D_x1mtn")
